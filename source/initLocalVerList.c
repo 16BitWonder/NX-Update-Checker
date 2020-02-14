@@ -25,10 +25,13 @@ Entry* initLocalVerList()
 	/* Name of Current Title */
 	char *titleName;
 	
+	/* Display Version of Current Title */
+	char *titleDispVersion;
+	
 	while (recordsEntry < recordsLength)
 	{
 		currMeta = *(metaStatusList+recordsEntry);
-		updateTitleName(&titleName, titleRecords[recordsEntry].application_id);
+		updateMeta(&titleName, &titleDispVersion, titleRecords[recordsEntry].application_id);
 		
 		tmp = calloc(1, sizeof(Entry));
 		currEntry->next = tmp;
@@ -79,6 +82,9 @@ Entry* initLocalVerList()
 		
 		/* Parse Name into currEntry */
 		strncpy(currEntry->Data.name, titleName, 0x200);
+		
+		/* Parse DispVersion itno currEntry */
+		strncpy(currEntry->Data.displayVersion, titleDispVersion, 0x0F);
 		
 		/* Move to next record */
 		recordsEntry++;

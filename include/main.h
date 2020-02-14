@@ -6,6 +6,7 @@
 struct MetaData {
 	char TID [10];
 	int version;
+	char displayVersion [0x10];
 	char name [0x201];
 };
 typedef struct Entry {
@@ -15,7 +16,7 @@ typedef struct Entry {
 }Entry;
 
 void initLists(NsApplicationRecord**, int*, NsApplicationContentMetaStatus***, int**);
-void updateTitleName(char**, u64);
+void updateMeta(char**, char**, u64);
 Entry* initLocalVerList(void);
 Entry* initExtVerList(void);
 void checkForUpdates(FILE*, Entry*, Entry*);
