@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 		consoleExit(NULL);
 		return 0;
 	}
-	printf("versionlist.json loaded!\n\n");
+	printf("JSON loaded!\n\n");
 	printf("Checking against installed titles for updates...\n\n");
 	
 	FILE *updFile;
@@ -38,8 +38,7 @@ int main(int argc, char **argv)
 	
 	bool finished = false;
     while(appletMainLoop())
-	{
-		
+	{	
 		if (!finished)
 		{
 			checkForUpdates(updFile, currLocalEntry, extVerList);
