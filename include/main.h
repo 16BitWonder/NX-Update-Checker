@@ -1,7 +1,11 @@
+#include <switch.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <switch.h>
+#include <dirent.h>
+#include <unistd.h>
+#define GetCurrentDir getcwd
+
 
 struct MetaData {
 	char TID [10];
