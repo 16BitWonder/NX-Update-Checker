@@ -110,12 +110,13 @@ Entry* initLocalVerList()
 						bool updatedBase = false;
 						while (!updatedBase)
 						{
-							if (tmp->Data.TID[15] == '0')
+							if (tmp->Data.TID[13] == '8')
 							{
 								/* Update Version in tmp */
 								tmp->Data.version = currMeta[i].version;
 								updatedBase = true;
 							}
+							tmp = tmp->prev;
 						}
 						tmp = NULL;
 					}
