@@ -24,8 +24,8 @@ void checkForUpdates(FILE *out, Entry *localEntries, Entry *extEntries)
 			{
 				if (tmpExt->Data.version > tmpLocal->Data.version)
 				{
-					fprintf(out, "%s [0100%s000][%s][v%d] -> [v%d]\n", tmpLocal->Data.name, tmpLocal->Data.TID, tmpLocal->Data.displayVersion, tmpLocal->Data.version, tmpExt->Data.version);
-					printf("%s [0100%s000][%s][v%d] -> [v%d]\n", tmpLocal->Data.name, tmpLocal->Data.TID, tmpLocal->Data.displayVersion, tmpLocal->Data.version, tmpExt->Data.version);
+					fprintf(out, "%s [%s][%s][v%d] -> [v%d]\n", tmpLocal->Data.name, tmpLocal->Data.TID, tmpLocal->Data.displayVersion, tmpLocal->Data.version, tmpExt->Data.version);
+					printf("%s [%s][%s][v%d] -> [v%d]\n", tmpLocal->Data.name, tmpLocal->Data.TID, tmpLocal->Data.displayVersion, tmpLocal->Data.version, tmpExt->Data.version);
 					consoleUpdate(NULL);
 				}
 				tmpExt = NULL;

@@ -3,12 +3,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <dirent.h>
-#include <unistd.h>
 #define GetCurrentDir getcwd
 
 
 struct MetaData {
-	char TID [10];
+	char TID [17];
 	int version;
 	char displayVersion [0x10];
 	char name [0x201];

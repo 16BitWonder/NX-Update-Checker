@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 		consoleExit(NULL);
 		return 0;
 	}
-	printf("JSON loaded!\n\n");
+	printf("versions.txt loaded!\n\n");
 	printf("Checking against installed titles for updates...\n\n");
 	
 	FILE *updFile;

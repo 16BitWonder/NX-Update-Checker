@@ -44,7 +44,7 @@ DATA		:=	data
 INCLUDES	:=	include
 APP_TITLE	:=	NX-Update-Checker
 APP_AUTHOR	:=	8BitWonder
-APP_VERSION	:=	v1.2.0
+APP_VERSION	:=	v1.3.0
 ICON		:=	icon.jpg
 
 #---------------------------------------------------------------------------------
