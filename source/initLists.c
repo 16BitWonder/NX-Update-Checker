@@ -5,8 +5,8 @@ void initLists(NsApplicationRecord **titleRecords, int *recordsLength, NsApplica
 	nsInitialize();
 	/* Construct Installed Titles List */
     NsApplicationRecord *wipRecords;
-	wipRecords = malloc(sizeof(NsApplicationRecord) * 1000);
-    nsListApplicationRecord(wipRecords, 1000, 0, recordsLength);
+	wipRecords = malloc(sizeof(NsApplicationRecord) * 5000);
+    nsListApplicationRecord(wipRecords, 5000, 0, recordsLength);
 	
 	/* Construct Meta Status List */
 	int tmpRecordsLength = *recordsLength;
