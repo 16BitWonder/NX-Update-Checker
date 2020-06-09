@@ -4,7 +4,7 @@
 A small console application that checks a Switch's installed contents against a provided versionlist for newer updates, and then writes the titles with newer updates and the latest version to sdmc:/Available-Updates.txt.
 
 ## Usage
-- Grab the latest versions.txt available from the [titledb Repository](https://github.com/blawar/titledb/blob/master/versions.txt), and save it in the same directory as NX-Update-Checker.nro
+- In case of no internet connection, grab the latest versions.txt available from the [titledb Repository](https://github.com/blawar/titledb/blob/master/versions.txt), and save it in the same directory as NX-Update-Checker.nro
 - Run the nro with your favorite variation of the HBMenu
 - Watch the pretty text move across the screen
 - Profit(?)
