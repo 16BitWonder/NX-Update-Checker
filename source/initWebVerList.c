@@ -40,7 +40,7 @@ static int xferinfo(
 
 	if(now - then >= 250 * 1000){
 		consoleClear();
-		printf("Downloading version.txt...\n");
+		printf("Downloading versions.txt...\n");
 		printf("DOWN: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T"\r\n", dlnow, dltotal);
 		consoleUpdate(NULL);
 		then = now;
