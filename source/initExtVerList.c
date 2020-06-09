@@ -25,7 +25,6 @@ Entry* initExtVerList()
 	/* Have an empty entry at head of list */
 	currExtEntry = calloc(1, sizeof(Entry));
 	
-	// char* selectedTxt = calloc(NAME_MAX, sizeof(char));
 	fseek(verListTxt, 0, SEEK_END);
 	long fileSize = ftell(verListTxt);
 	memVerList = calloc(fileSize, sizeof(char));
@@ -45,7 +44,6 @@ Entry* initExtVerList()
 			if (kDown & KEY_PLUS) return NULL;
 		}
 	}
-	// free(selectedTxt);
 	
 	return handleVerList(currExtEntry, fileSize, memVerList);
 }
