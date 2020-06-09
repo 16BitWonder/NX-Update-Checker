@@ -9,10 +9,13 @@ A small console application that checks a Switch's installed contents against a 
 - Watch the pretty text move across the screen
 - Profit(?)
 
-
-## Notice
+## Additional Information
 This app was specifically re-written to parse the versions.txt posted in the [titledb Repository](https://github.com/blawar/titledb), if you provide a versions.txt with even a slightly different format it is likely this application will not parse it correctly.
 
+As of writing (2020/06/09) binaries are built using switch-curl 7.69.1-1, as building with switch-curl 7.69.1-2 will not allow users with blanked cal0 to download versions.txt over the internet.
+
 ## Kudos
-A big thank you to Blawar, for maintaining the titledb Repository.
+A big thank you to blawar, for maintaining the titledb Repository.
 Without a nice stream of updated versionlists this wouldn't be feasible.
+
+Another huge thank you to aedalzotto, for both implementing the ability to download versions.txt over the internet and fixing my terrible parsing code.
