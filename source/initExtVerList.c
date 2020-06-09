@@ -3,7 +3,7 @@
 Entry* initExtVerList()
 {
 	FILE *verListTxt;
-	Entry *listHead, *currExtEntry, *tmp;
+	Entry *currExtEntry;
 	char *memVerList;
 	
 	verListTxt = fopen("versions.txt", "r");
@@ -24,9 +24,7 @@ Entry* initExtVerList()
 	
 	/* Have an empty entry at head of list */
 	currExtEntry = calloc(1, sizeof(Entry));
-	listHead = currExtEntry;
 	
-	char* selectedTxt = calloc(NAME_MAX, sizeof(char));
 	fseek(verListTxt, 0, SEEK_END);
 	long fileSize = ftell(verListTxt);
 	memVerList = calloc(fileSize, sizeof(char));
@@ -46,59 +44,6 @@ Entry* initExtVerList()
 			if (kDown & KEY_PLUS) return NULL;
 		}
 	}
-	free(selectedTxt);
 	
-	/* Create our linked list of versionlist Entries */
-	int parsedExtEntries = 0;
-	long index = 21;
-	while (index < fileSize)
-	{
-		if ((*(memVerList + (index +  13)) != 0) || (*(memVerList + (index + 14)) != 0) || (*(memVerList + (index + 15)) != 0))
-		{
-			tmp = calloc(1, sizeof(Entry));
-			tmp->prev = currExtEntry;
-			currExtEntry->next = tmp;
-			tmp = NULL;
-			currExtEntry = currExtEntry->next;
-
-			/* Parse TID */
-			for (int i = 0; i < 16; i++)
-			{
-				currExtEntry->Data.TID[i] = *(memVerList + (index + i));
-			}
-			currExtEntry->Data.TID[16] = 0;
-			index += 50;
-
-			/* Parse Version */
-			char c = 0;
-			currExtEntry->Data.version = 0;
-			if (*(memVerList + index) != 13)
-			{
-				c = *(memVerList + index);
-				while (c != 13)
-				{
-					currExtEntry->Data.version *= 10;
-					currExtEntry->Data.version += (*(memVerList + index) - 48);
-					index++;
-					c = *(memVerList + index);
-				}
-			}
-			parsedExtEntries++;
-		}
-		else
-		{
-			index += 50;
-			while (*(memVerList + index) != 13)
-				index++;
-		}
-		index += 2;
-		
-		consoleClear();
-		printf("Parsing versions.txt...\n\n");
-		printf("Parsed entries: %d", parsedExtEntries);
-		consoleUpdate(NULL);
-	}
-
-	consoleClear();
-	return listHead;
+	return handleVerList(currExtEntry, fileSize, memVerList);
 }

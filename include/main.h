@@ -5,6 +5,7 @@
 #include <dirent.h>
 #define GetCurrentDir getcwd
 
+#define VERSIONS_URL "https://raw.githubusercontent.com/blawar/titledb/master/versions.txt"
 
 struct MetaData {
 	char TID [17];
@@ -22,5 +23,7 @@ void initLists(NsApplicationRecord**, int*, NsApplicationContentMetaStatus***, i
 void updateMeta(char**, char**, u64);
 Entry* initLocalVerList(void);
 Entry* initExtVerList(void);
+Entry* initWebVerList(void);
+Entry* handleVerList(Entry*, long, char*);
 void checkForUpdates(FILE*, Entry*, Entry*);
 void freeList(Entry*);

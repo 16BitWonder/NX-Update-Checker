@@ -8,8 +8,25 @@ int main(int argc, char **argv)
 	localVerList = initLocalVerList();
 	Entry *currLocalEntry = localVerList->next;
 	
+	socketInitializeDefault();
 	Entry *extVerList;
-	extVerList = initExtVerList();
+	extVerList = initWebVerList();
+	socketExit();
+
+	if (extVerList == NULL){
+		printf("\nPress (+) to continue.\n");
+		consoleUpdate(NULL);
+		while (1)
+		{
+			hidScanInput();
+			u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
+			if (kDown & KEY_PLUS)
+				break;
+		}
+		consoleClear();
+		extVerList = initExtVerList();
+	}
+	
 	if (extVerList == NULL)
 	{
 		freeList(localVerList);
