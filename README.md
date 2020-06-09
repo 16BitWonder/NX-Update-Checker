@@ -15,7 +15,7 @@ This app was specifically re-written to parse the versions.txt posted in the [ti
 As of writing (2020/06/09) binaries are built using switch-curl 7.69.1-1, as building with switch-curl 7.69.1-2 will not allow users with blanked cal0 to download versions.txt over the internet.
 
 ## Kudos
-A big thank you to blawar, for maintaining the titledb Repository.
+A big thank you to [blawar](https://github.com/blawar), for maintaining the titledb Repository.
 Without a nice stream of updated versionlists this wouldn't be feasible.
 
-Another huge thank you to aedalzotto, for both implementing the ability to download versions.txt over the internet and fixing my terrible parsing code.
+Another huge thank you to [aedalzotto](https://github.com/aedalzotto), for both implementing the ability to download versions.txt over the internet and fixing my terrible parsing code.
