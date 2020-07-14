@@ -5,7 +5,7 @@
 #include <dirent.h>
 #define GetCurrentDir getcwd
 
-#define VERSIONS_URL "https://raw.githubusercontent.com/blawar/titledb/master/versions.txt"
+#define VERSIONS_URL "https://raw.githubusercontent.com/16BitWonder/nx-versions/master/versions.txt"
 
 struct MetaData {
 	char TID [17];

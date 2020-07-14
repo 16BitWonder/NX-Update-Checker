@@ -135,15 +135,21 @@ Entry* initLocalVerList()
 				strncpy(currEntry->Data.displayVersion, titleDispVersion, 0x0F);
 			}
 
-			printf("Building Local VerList: %d", ++c);
-			consoleUpdate(NULL);
-			consoleClear();
+
+			c++;
+			if(c % 15 == 0)
+			{
+				consoleClear();
+				printf("Building Local VerList: %d", c);
+				consoleUpdate(NULL);
+			}
 		}
 		
 		/* Move to next record */
 		recordsEntry++;
 	}
 	
+	consoleClear();
 	free(titleRecords);
 	free(metaLength);
 	free(metaStatusList);

@@ -11,7 +11,8 @@ Entry* initExtVerList()
 	{
 		printf("\nPlease place a copy of versions.txt in the same directory as this nro.\n");
 		printf("You may find a compatible versions.txt this app was tested with on the\n");
-		printf("following repository: https://github.com/blawar/titledb/blob/master/versions.txt\n\n");
+		printf("following repository:\n");
+		printf("   %s\n\n", VERSIONS_URL);
 		printf("Press (+) to exit.");
 		consoleUpdate(NULL);
 		while (1)

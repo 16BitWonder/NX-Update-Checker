@@ -7,7 +7,7 @@ Entry *handleVerList(Entry *currExtEntry, long fileSize, char *memVerList)
 
 	/* Create our linked list of versionlist Entries */
 	int parsedExtEntries = 0;
-	long index = 21;
+	long index = 12;
 	while (index < fileSize)
 	{
 		if ((*(memVerList + (index +  13)) != 0) || (*(memVerList + (index + 14)) != 0) || (*(memVerList + (index + 15)) != 0))
@@ -24,7 +24,7 @@ Entry *handleVerList(Entry *currExtEntry, long fileSize, char *memVerList)
 				currExtEntry->Data.TID[i] = *(memVerList + (index + i));
 			}
 			currExtEntry->Data.TID[16] = 0;
-			index += 50;
+			index += 17;
 
 			/* Parse Version */
 			char c = 0;
@@ -44,7 +44,7 @@ Entry *handleVerList(Entry *currExtEntry, long fileSize, char *memVerList)
 		}
 		else
 		{
-			index += 50;
+			index += 17;
 			while (*(memVerList + index) != 13)
 				index++;
 		}
