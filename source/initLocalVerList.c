@@ -1,5 +1,8 @@
 #include "main.h"
 
+extern bool logging;
+extern FILE *logFile;
+
 Entry* initLocalVerList()
 {
 	/* Linked list of Entries to return */
@@ -18,6 +21,9 @@ Entry* initLocalVerList()
 	
 	/* Init titleRecords and metaStatusList */
 	initLists(&titleRecords, &recordsLength, &metaStatusList, &metaLength);
+	if (logging) {
+		fprintf(logFile, "[initLocalVerList] Finished initLists\n");
+	}
 	
 	/* Meta Status List of Current Title */
 	NsApplicationContentMetaStatus *currMeta;
@@ -79,6 +85,9 @@ Entry* initLocalVerList()
 				/* Base Title */
 				if (tmpFlipTID[13] == '0')
 				{
+					if (logging) {
+						fprintf(logFile, "[initLocalVerList][%d] Parsed base %s as ", c, tmpFlipTID);
+					}
 					strcpy(currEntry->Data.TID, tmpFlipTID);
 					currEntry->Data.TID[13] = '8';
 					/* Parse Version into currEntry */
@@ -87,6 +96,9 @@ Entry* initLocalVerList()
 					strncpy(currEntry->Data.name, titleName, 0x200);
 					/* Parse DispVersion into currEntry */
 					strncpy(currEntry->Data.displayVersion, titleDispVersion, 0x0F);
+					if (logging) {
+						fprintf(logFile, "%s\n", currEntry->Data.TID);
+					}
 					baseFound = true;
 				}
 				/* Update */
@@ -101,6 +113,9 @@ Entry* initLocalVerList()
 						strncpy(currEntry->Data.name, titleName, 0x200);
 						/* Parse DispVersion into currEntry */
 						strncpy(currEntry->Data.displayVersion, titleDispVersion, 0x0F);
+						if (logging) {
+							fprintf(logFile, "[initLocalVerList][%d] Parsed update %s\n", c, tmpFlipTID);
+						}
 					}
 					else
 					{
@@ -115,6 +130,9 @@ Entry* initLocalVerList()
 								/* Update Version in tmp */
 								tmp->Data.version = currMeta[i].version;
 								updatedBase = true;
+								if (logging) {
+									fprintf(logFile, "[initLocalVerList][%d] Updated base %s version with update %s version\n", c, tmp->Data.TID, tmpFlipTID);
+								}
 							}
 							tmp = tmp->prev;
 						}
@@ -133,6 +151,9 @@ Entry* initLocalVerList()
 				strncpy(currEntry->Data.name, titleName, 0x200);
 				/* Parse DispVersion into currEntry */
 				strncpy(currEntry->Data.displayVersion, titleDispVersion, 0x0F);
+				if (logging) {
+					fprintf(logFile, "[initLocalVerList][%d] Parsed DLC %s\n", c, tmpFlipTID);
+				}
 			}
 
 
@@ -148,10 +169,22 @@ Entry* initLocalVerList()
 		/* Move to next record */
 		recordsEntry++;
 	}
+	if (logging) {
+		fprintf(logFile, "[initLocalVerList] Finished building local version list\n");
+	}
 	
 	consoleClear();
 	free(titleRecords);
+	if (logging) {
+		fprintf(logFile, "[initLocalVerList] Freed titleRecords\n");
+	}
 	free(metaLength);
+	if (logging) {
+		fprintf(logFile, "[initLocalVerList] Freed metaLength\n");
+	}
 	free(metaStatusList);
+	if (logging) {
+		fprintf(logFile, "[initLocalVerList] Freed metaStatusList\n");
+	}
 	return localVerList;
 }
