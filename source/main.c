@@ -1,20 +1,34 @@
 #include "main.h"
 
 bool logging = false;
+FILE *logFile;
 PadState pad;
 
 int main(int argc, char **argv)
 {
 	logging = initLogging();
+	if (logging) {
+		logFile = fopen("/NXUC.log", "w");
+		fprintf(logFile, "[main] Logging Initialized\n");
+	}
 	
 	padConfigureInput(1, HidNpadStyleSet_NpadStandard);
 	padInitializeDefault(&pad);
+	if (logging) {
+		fprintf(logFile, "[main] Pad Initialized\n");
+	}
 	
 	consoleInit(NULL);
+	if (logging) {
+		fprintf(logFile, "[main] Console Initialized\n");
+	}
 	
 	Entry *localVerList;
 	localVerList = initLocalVerList();
 	Entry *currLocalEntry = localVerList->next;
+	if (logging) {
+		fprintf(logFile, "[main] Local Version List Initialized\n");
+	}
 	
 	socketInitializeDefault();
 	Entry *extVerList;
@@ -41,6 +55,10 @@ int main(int argc, char **argv)
 		consoleExit(NULL);
 		return 0;
 	}
+	if (logging) {
+		fprintf(logFile, "[main] External Version List Initialized\n");
+	}
+	
 	printf("versions.txt loaded!\n\n");
 	printf("Checking against installed titles for updates...\n\n");
 	
@@ -60,6 +78,9 @@ int main(int argc, char **argv)
 			if (kDown & HidNpadButton_Plus) return 0;
 		}
 	}
+	if (logging) {
+		fprintf(logFile, "[main] Opened Available-Updates.txt\n");
+	}
 	
 	bool finished = false;
     while(appletMainLoop())
@@ -67,6 +88,9 @@ int main(int argc, char **argv)
 		if (!finished)
 		{
 			checkForUpdates(updFile, currLocalEntry, extVerList);
+			if (logging) {
+				fprintf(logFile, "[main] Finished checkForUpdates\n");
+			}
 			
 			if (fclose(updFile) != 0)
 			{
@@ -86,16 +110,16 @@ int main(int argc, char **argv)
 					}
 				}
 			}
+			if (logging) {
+				fprintf(logFile, "[main] Closed Available-Updates.txt\n");
+			}
 			
 			printf("\nResults printed into sdmc:/Available-Updates.txt!\n\n");
 			printf("Press (+) to exit.");
+			
 			if (logging)
 			{
 				printf("\nLogging was enabled");
-			}
-			else
-			{
-				printf("\nLogging was not enabled");
 			}
 			finished = true;
 		}
@@ -107,7 +131,14 @@ int main(int argc, char **argv)
     }
 
 	freeList(localVerList);
+	if (logging) {
+		fprintf(logFile, "[main] Freed localVerList\n");
+	}
 	freeList(extVerList);
+	if (logging) {
+		fprintf(logFile, "[main] Freed extVerList\n");
+	}
+	fclose(logFile);
 	consoleExit(NULL);
     return 0;
 }
