@@ -1,7 +1,15 @@
 #include "main.h"
 
+bool logging = false;
+PadState pad;
+
 int main(int argc, char **argv)
 {
+	logging = initLogging();
+	
+	padConfigureInput(1, HidNpadStyleSet_NpadStandard);
+	padInitializeDefault(&pad);
+	
 	consoleInit(NULL);
 	
 	Entry *localVerList;
@@ -18,9 +26,9 @@ int main(int argc, char **argv)
 		consoleUpdate(NULL);
 		while (1)
 		{
-			hidScanInput();
-			u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
-			if (kDown & KEY_PLUS)
+			padUpdate(&pad);
+			u64 kDown = padGetButtonsDown(&pad);
+			if (kDown & HidNpadButton_Plus)
 				break;
 		}
 		consoleClear();
@@ -47,9 +55,9 @@ int main(int argc, char **argv)
 		freeList(extVerList);
 		while (1)
 		{
-			hidScanInput();
-			u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
-			if (kDown & KEY_PLUS) return 0;
+			padUpdate(&pad);
+			u64 kDown = padGetButtonsDown(&pad);
+			if (kDown & HidNpadButton_Plus) return 0;
 		}
 	}
 	
@@ -67,9 +75,9 @@ int main(int argc, char **argv)
 				consoleUpdate(NULL);
 				while (1)
 				{
-					hidScanInput();
-					u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
-					if (kDown & KEY_PLUS)
+					padUpdate(&pad);
+					u64 kDown = padGetButtonsDown(&pad);
+					if (kDown & HidNpadButton_Plus)
 					{
 						consoleExit(NULL);
 						freeList(localVerList);
@@ -81,12 +89,20 @@ int main(int argc, char **argv)
 			
 			printf("\nResults printed into sdmc:/Available-Updates.txt!\n\n");
 			printf("Press (+) to exit.");
+			if (logging)
+			{
+				printf("\nLogging was enabled");
+			}
+			else
+			{
+				printf("\nLogging was not enabled");
+			}
 			finished = true;
 		}
 		
-		hidScanInput();
-		u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
-		if (kDown & KEY_PLUS) break;
+		padUpdate(&pad);
+		u64 kDown = padGetButtonsDown(&pad);
+		if (kDown & HidNpadButton_Plus) break;
 		consoleUpdate(NULL);
     }
 

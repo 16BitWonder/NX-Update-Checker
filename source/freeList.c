@@ -6,9 +6,11 @@ void freeList(Entry *head)
 	currEntry = head;
 	
 	/* Free List */
-	while (currEntry != NULL)
+	while (head != NULL)
 	{
 		head = head->next;
+		currEntry->prev = NULL;
+		currEntry->next = NULL;
 		free(currEntry);
 		currEntry = head;
 	}

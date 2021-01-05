@@ -1,5 +1,7 @@
 #include "main.h"
 
+extern PadState pad;
+
 Entry* initExtVerList()
 {
 	FILE *verListTxt;
@@ -17,9 +19,9 @@ Entry* initExtVerList()
 		consoleUpdate(NULL);
 		while (1)
 		{
-			hidScanInput();
-			u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
-			if (kDown & KEY_PLUS) return NULL;
+			padUpdate(&pad);
+			u64 kDown = padGetButtonsDown(&pad);
+			if (kDown & HidNpadButton_Plus) return NULL;
 		}
 	}
 	
@@ -40,9 +42,9 @@ Entry* initExtVerList()
 		consoleUpdate(NULL);
 		while (1)
 		{
-			hidScanInput();
-			u64 kDown = hidKeysDown(CONTROLLER_P1_AUTO);
-			if (kDown & KEY_PLUS) return NULL;
+			padUpdate(&pad);
+			u64 kDown = padGetButtonsDown(&pad);
+			if (kDown & HidNpadButton_Plus) return NULL;
 		}
 	}
 	

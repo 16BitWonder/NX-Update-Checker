@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <dirent.h>
+#include <unistd.h>
 #define GetCurrentDir getcwd
 
 #define VERSIONS_URL "https://raw.githubusercontent.com/16BitWonder/nx-versions/master/versions.txt"
@@ -19,6 +20,7 @@ typedef struct Entry {
 	struct Entry *prev;
 }Entry;
 
+bool initLogging(void);
 void initLists(NsApplicationRecord**, int*, NsApplicationContentMetaStatus***, int**);
 void updateMeta(char**, char**, u64);
 Entry* initLocalVerList(void);
