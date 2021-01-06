@@ -3,8 +3,7 @@
 extern bool logging;
 extern FILE *logFile;
 
-Entry* initLocalVerList()
-{
+Entry* initLocalVerList() {
 	/* Linked list of Entries to return */
 	Entry *localVerList, *currEntry, *tmp;
 	currEntry = calloc(1, sizeof(Entry));
@@ -35,16 +34,14 @@ Entry* initLocalVerList()
 	char *titleDispVersion;
 
 	int c  = 0;
-	while (recordsEntry < recordsLength)
-	{
+	while (recordsEntry < recordsLength) {
 		currMeta = *(metaStatusList+recordsEntry);
 		updateMeta(&titleName, &titleDispVersion, titleRecords[recordsEntry].application_id);
 
 		/* Parse through all content under current Title*/
 		bool updateFound = false;
 		bool baseFound = false;
-		for (int i = 0; i < *(metaLength + recordsEntry); i++)
-		{
+		for (int i = 0; i < *(metaLength + recordsEntry); i++) {
 			tmp = calloc(1, sizeof(Entry));
 			currEntry->next = tmp;
 			tmp->prev = currEntry;
@@ -53,18 +50,14 @@ Entry* initLocalVerList()
 
 			/* Parse TID into currEntry */
 			char tmpTID[17];
-			for (int j = 0; j < 16; j++)
-			{
+			for (int j = 0; j < 16; j++) {
 				char currDigit;
 				int currInt = currMeta[i].application_id % 16;
 				currMeta[i].application_id /= 16;
-				if (currInt > 9)
-				{
+				if (currInt > 9) {
 					currInt -= 10;
 					currDigit = currInt + 'A';
-				}
-				else
-				{
+				} else {
 					currDigit = currInt + '0';
 				}
 				tmpTID[j] = currDigit;
@@ -72,19 +65,16 @@ Entry* initLocalVerList()
 
 			/* Need to flip what we parsed */
 			char tmpFlipTID[17];
-			for (int j = 0; j < 8; j++)
-			{
+			for (int j = 0; j < 8; j++) {
 				tmpFlipTID[j] = tmpTID[15 - j];
 				tmpFlipTID[15 - j] = tmpTID[j];
 			}
 			tmpFlipTID[16] = 0;
 
 			/* Check what kind of content we have and parse accordingly */
-			if (!updateFound && (tmpFlipTID[14] == '0') && (tmpFlipTID[15] == '0'))
-			{
+			if (!updateFound && (tmpFlipTID[14] == '0') && (tmpFlipTID[15] == '0')) {
 				/* Base Title */
-				if (tmpFlipTID[13] == '0')
-				{
+				if (tmpFlipTID[13] == '0') {
 					if (logging) {
 						fprintf(logFile, "[initLocalVerList][%d] Parsed base %s as ", c, tmpFlipTID);
 					}
@@ -102,10 +92,8 @@ Entry* initLocalVerList()
 					baseFound = true;
 				}
 				/* Update */
-				else if (tmpFlipTID[13] == '8')
-				{
-					if (!baseFound)
-					{
+				else if (tmpFlipTID[13] == '8') {
+					if (!baseFound) {
 						strcpy(currEntry->Data.TID, tmpFlipTID);
 						/* Parse Version into currEntry */
 						currEntry->Data.version = currMeta[i].version;
@@ -116,17 +104,13 @@ Entry* initLocalVerList()
 						if (logging) {
 							fprintf(logFile, "[initLocalVerList][%d] Parsed update %s\n", c, tmpFlipTID);
 						}
-					}
-					else
-					{
+					} else {
 						currEntry = currEntry->prev;
 						free(currEntry->next);
 						tmp = currEntry;
 						bool updatedBase = false;
-						while (!updatedBase)
-						{
-							if (tmp->Data.TID[13] == '8')
-							{
+						while (!updatedBase) {
+							if (tmp->Data.TID[13] == '8') {
 								if (logging) {
 									fprintf(logFile, "[initLocalVerList][%d] Updated base [%s][v%d]", c, tmp->Data.TID, tmp->Data.version);
 								}
@@ -142,17 +126,14 @@ Entry* initLocalVerList()
 						tmp = NULL;
 					}
 					updateFound = true;
-				}
-				else
-				{
+				} else {
 					if (logging) {
 						fprintf(logFile, "[initLocalVerList][%d] Not parsed, look into this %s\n", c, tmpFlipTID);
 					}
 				}
 			}
 			/* DLC */
-			else if (strcmp("000", (tmpFlipTID+13)) != 0)
-			{
+			else if (strcmp("000", (tmpFlipTID+13)) != 0) {
 				strcpy(currEntry->Data.TID, tmpFlipTID);
 				/* Parse Version into currEntry */
 				currEntry->Data.version = currMeta[i].version;
@@ -163,9 +144,7 @@ Entry* initLocalVerList()
 				if (logging) {
 					fprintf(logFile, "[initLocalVerList][%d] Parsed DLC %s\n", c, tmpFlipTID);
 				}
-			}
-			else
-			{
+			} else {
 				currEntry = currEntry->prev;
 				free(currEntry->next);
 				currEntry->next = NULL;
@@ -176,8 +155,7 @@ Entry* initLocalVerList()
 
 
 			c++;
-			if(c % 15 == 0)
-			{
+			if(c % 15 == 0) {
 				consoleClear();
 				printf("Building Local VerList: %d", c);
 				consoleUpdate(NULL);

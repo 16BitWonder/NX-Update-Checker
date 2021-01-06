@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include "main.h"
 
-void updateMeta(char **namePtr, char **dispVerPtr, u64 TID)
-{
+void updateMeta(char **namePtr, char **dispVerPtr, u64 TID) {
 	nsInitialize();
 	char *name;
 	char *dispVer;

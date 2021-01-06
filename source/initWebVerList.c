@@ -6,8 +6,7 @@ struct MemoryStruct {
 	size_t size;
 };
 
-static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp)
-{
+static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp) {
 	size_t realsize = size * nmemb;
 	struct MemoryStruct *mem = (struct MemoryStruct *)userp;
 
@@ -26,19 +25,12 @@ static size_t WriteMemoryCallback(void *contents, size_t size, size_t nmemb, voi
 	return realsize;
 }
 
-static int xferinfo(
-	void *curl,
-	curl_off_t dltotal,
-	curl_off_t dlnow,
-	curl_off_t ultotal,
-	curl_off_t ulnow
-)
-{
+static int xferinfo(void *curl, curl_off_t dltotal, curl_off_t dlnow, curl_off_t ultotal, curl_off_t ulnow) {
 	static curl_off_t then = -500;
 	curl_off_t now = 0;
 	curl_easy_getinfo(curl, CURLINFO_TOTAL_TIME_T, &now);
 
-	if(now - then >= 250 * 1000){
+	if(now - then >= 250 * 1000) {
 		consoleClear();
 		printf("Downloading versions.txt...\n");
 		printf("DOWN: %" CURL_FORMAT_CURL_OFF_T " of %" CURL_FORMAT_CURL_OFF_T"\r\n", dlnow, dltotal);
@@ -49,10 +41,9 @@ static int xferinfo(
 	return 0;
 }
 
-Entry* initWebVerList()
-{
+Entry* initWebVerList() {
 	CURLcode ret = curl_global_init(CURL_GLOBAL_ALL);
-	if(ret == 2){
+	if(ret == 2) {
 		printf("\nThis application was probably built with a newer libcurl.\n");
 		printf("Connections with blanked cal0 will fail.\n");
 		printf("Please downgrade switch-curl to 7.69.1-1 and rebuild\n\n");
@@ -81,7 +72,7 @@ Entry* initWebVerList()
 	curl_handle = NULL;
 	curl_global_cleanup();
 
-	if(ret != CURLE_OK){
+	if(ret != CURLE_OK) {
 		printf("\nFailed to download a copy of versions.txt from web source:\n");
 		printf("%s\n\n", VERSIONS_URL);
 		printf("Falling back to external downloaded file.\n");

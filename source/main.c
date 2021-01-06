@@ -4,8 +4,7 @@ bool logging = false;
 FILE *logFile;
 PadState pad;
 
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	logging = initLogging();
 	if (logging) {
 		logFile = fopen("/NXUC.log", "w");
@@ -37,17 +36,16 @@ int main(int argc, char **argv)
 	Entry *extVerList;
 	extVerList = initWebVerList();
 	socketExit();
-	if (logging && (extVerList == NULL)){
+	if (logging && (extVerList == NULL)) {
 		fprintf(logFile, "[main] initWebVerList completed, did not retrieve versions.txt\n");
 	} else if (logging) {
 		fprintf(logFile, "[main] initWebVerList completed, retrieved versions.txt\n");
 	}
 
-	if (extVerList == NULL){
+	if (extVerList == NULL) {
 		printf("\nPress (+) to continue.\n");
 		consoleUpdate(NULL);
-		while (1)
-		{
+		while (1) {
 			padUpdate(&pad);
 			u64 kDown = padGetButtonsDown(&pad);
 			if (kDown & HidNpadButton_Plus)
@@ -58,15 +56,14 @@ int main(int argc, char **argv)
 			fprintf(logFile, "[main] Begin initExtVerList\n");
 		}
 		extVerList = initExtVerList();
-		if (logging && (extVerList == NULL)){
+		if (logging && (extVerList == NULL)) {
 			fprintf(logFile, "[main] initExtVerList completed, did not find versions.txt\n");
 		} else if (logging) {
 			fprintf(logFile, "[main] initExtVerList completed, found versions.txt\n");
 		}
 	}
 	
-	if (extVerList == NULL)
-	{
+	if (extVerList == NULL) {
 		freeList(localVerList);
 		if (logging) {
 			fprintf(logFile, "[main] Freed localVerList\n");
@@ -83,15 +80,13 @@ int main(int argc, char **argv)
 	
 	FILE *updFile;
 	updFile = fopen("/Available-Updates.txt", "w");
-	if (updFile == NULL)
-	{
+	if (updFile == NULL) {
 		perror("Available-Updates.txt");
 		printf("\nPress (+) to exit.");
 		consoleUpdate(NULL);
 		freeList(localVerList);
 		freeList(extVerList);
-		while (1)
-		{
+		while (1) {
 			padUpdate(&pad);
 			u64 kDown = padGetButtonsDown(&pad);
 			if (kDown & HidNpadButton_Plus) return 0;
@@ -102,26 +97,21 @@ int main(int argc, char **argv)
 	}
 	
 	bool finished = false;
-    while(appletMainLoop())
-	{	
-		if (!finished)
-		{
+    while(appletMainLoop()) {	
+		if (!finished) {
 			checkForUpdates(updFile, currLocalEntry, extVerList);
 			if (logging) {
 				fprintf(logFile, "[main] Finished checkForUpdates\n");
 			}
 			
-			if (fclose(updFile) != 0)
-			{
+			if (fclose(updFile) != 0) {
 				perror("Available-Updates.txt");
 				printf("\nPress (+) to exit.");
 				consoleUpdate(NULL);
-				while (1)
-				{
+				while (1) {
 					padUpdate(&pad);
 					u64 kDown = padGetButtonsDown(&pad);
-					if (kDown & HidNpadButton_Plus)
-					{
+					if (kDown & HidNpadButton_Plus) {
 						consoleExit(NULL);
 						freeList(localVerList);
 						freeList(extVerList);
@@ -136,8 +126,7 @@ int main(int argc, char **argv)
 			printf("\nResults printed into sdmc:/Available-Updates.txt!\n\n");
 			printf("Press (+) to exit.");
 			
-			if (logging)
-			{
+			if (logging) {
 				printf("\nLogging was enabled");
 			}
 			finished = true;
