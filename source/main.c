@@ -30,10 +30,18 @@ int main(int argc, char **argv)
 		fprintf(logFile, "[main] Local Version List Initialized\n");
 	}
 	
+	if (logging) {
+		fprintf(logFile, "[main] Begin initWebVerList\n");
+	}
 	socketInitializeDefault();
 	Entry *extVerList;
 	extVerList = initWebVerList();
 	socketExit();
+	if (logging && (extVerList == NULL)){
+		fprintf(logFile, "[main] initWebVerList completed, did not retrieve versions.txt\n");
+	} else if (logging) {
+		fprintf(logFile, "[main] initWebVerList completed, retrieved versions.txt\n");
+	}
 
 	if (extVerList == NULL){
 		printf("\nPress (+) to continue.\n");
@@ -46,12 +54,23 @@ int main(int argc, char **argv)
 				break;
 		}
 		consoleClear();
+		if (logging) {
+			fprintf(logFile, "[main] Begin initExtVerList\n");
+		}
 		extVerList = initExtVerList();
+		if (logging && (extVerList == NULL)){
+			fprintf(logFile, "[main] initExtVerList completed, did not find versions.txt\n");
+		} else if (logging) {
+			fprintf(logFile, "[main] initExtVerList completed, found versions.txt\n");
+		}
 	}
 	
 	if (extVerList == NULL)
 	{
 		freeList(localVerList);
+		if (logging) {
+			fprintf(logFile, "[main] Freed localVerList\n");
+		}
 		consoleExit(NULL);
 		return 0;
 	}
