@@ -127,11 +127,14 @@ Entry* initLocalVerList()
 						{
 							if (tmp->Data.TID[13] == '8')
 							{
+								if (logging) {
+									fprintf(logFile, "[initLocalVerList][%d] Updated base [%s][v%d]", c, tmp->Data.TID, tmp->Data.version);
+								}
 								/* Update Version in tmp */
 								tmp->Data.version = currMeta[i].version;
 								updatedBase = true;
 								if (logging) {
-									fprintf(logFile, "[initLocalVerList][%d] Updated base %s version with update %s version\n", c, tmp->Data.TID, tmpFlipTID);
+									fprintf(logFile, " with update [%s][v%d]\n", tmpFlipTID, tmp->Data.version);
 								}
 							}
 							tmp = tmp->prev;
@@ -140,9 +143,15 @@ Entry* initLocalVerList()
 					}
 					updateFound = true;
 				}
+				else
+				{
+					if (logging) {
+						fprintf(logFile, "[initLocalVerList][%d] Not parsed, look into this %s\n", c, tmpFlipTID);
+					}
+				}
 			}
 			/* DLC */
-			else
+			else if (strcmp("000", (tmpFlipTID+13)) != 0)
 			{
 				strcpy(currEntry->Data.TID, tmpFlipTID);
 				/* Parse Version into currEntry */
@@ -153,6 +162,15 @@ Entry* initLocalVerList()
 				strncpy(currEntry->Data.displayVersion, titleDispVersion, 0x0F);
 				if (logging) {
 					fprintf(logFile, "[initLocalVerList][%d] Parsed DLC %s\n", c, tmpFlipTID);
+				}
+			}
+			else
+			{
+				currEntry = currEntry->prev;
+				free(currEntry->next);
+				currEntry->next = NULL;
+				if (logging) {
+					fprintf(logFile, "[initLocalVerList][%d] Ignoring base %s found after update\n", c, tmpFlipTID);
 				}
 			}
 
