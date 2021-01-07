@@ -7,8 +7,14 @@ Entry* initExtVerList() {
 	Entry *currExtEntry;
 	char *memVerList;
 	
+	if (logging) {
+		fprintf(logFile, "[initExtVerList] Attempting to open versions.txt\n");
+	}
 	verListTxt = fopen("versions.txt", "r");
 	if (verListTxt == NULL) {
+		if (logging) {
+			fprintf(logFile, "[initExtVerList] versions.txt could not be opened\n");
+		}
 		printf("\nPlease place a copy of versions.txt in the same directory as this nro.\n");
 		printf("You may find a compatible versions.txt this app was tested with on the\n");
 		printf("following repository:\n");
@@ -30,6 +36,9 @@ Entry* initExtVerList() {
 	memVerList = calloc(fileSize, sizeof(char));
 	rewind(verListTxt);
 	fread(memVerList, 1, fileSize, verListTxt);
+	if (logging) {
+		fprintf(logFile, "[initExtVerList] Read versions.txt into memory\n");
+	}
 	
 	/*Close our input file*/
 	if (fclose(verListTxt) != 0) {
@@ -41,6 +50,9 @@ Entry* initExtVerList() {
 			u64 kDown = padGetButtonsDown(&pad);
 			if (kDown & HidNpadButton_Plus) return NULL;
 		}
+	}
+	if (logging) {
+		fprintf(logFile, "[initExtVerList] Closed versions.txt\n");
 	}
 	
 	return handleVerList(currExtEntry, fileSize, memVerList);
