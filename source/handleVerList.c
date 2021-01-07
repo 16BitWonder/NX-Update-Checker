@@ -42,7 +42,7 @@ Entry *handleVerList(Entry *currExtEntry, long fileSize, char *memVerList) {
 			}
 			parsedExtEntries++;
 			if (logging) {
-				fprintf(logFile, "[handleVerList][%d] Parsed [%s][%d]\n", parsedExtEntries, currExtEntry->Data.TID, currExtEntry->Data.version);
+				fprintf(logFile, "[handleVerList][%d] Parsed [%s][v%d]\n", parsedExtEntries, currExtEntry->Data.TID, currExtEntry->Data.version);
 			}
 		} else {
 			index += 17;
