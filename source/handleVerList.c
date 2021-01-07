@@ -1,9 +1,15 @@
 #include "main.h"
 
+extern bool logging;
+extern FILE *logFile;
+
 Entry *handleVerList(Entry *currExtEntry, long fileSize, char *memVerList) {
 	Entry *listHead, *tmp;
 	listHead = currExtEntry;
 
+	if (logging) {
+		fprintf(logFile, "[handleVerList] Begin populating external entries\n");
+	}
 	/* Create our linked list of versionlist Entries */
 	int parsedExtEntries = 0;
 	long index = 12;
@@ -35,6 +41,9 @@ Entry *handleVerList(Entry *currExtEntry, long fileSize, char *memVerList) {
 				}
 			}
 			parsedExtEntries++;
+			if (logging) {
+				fprintf(logFile, "[handleVerList][%d] Parsed [%s][%d]\n", parsedExtEntries, currExtEntry->Data.TID, currExtEntry->Data.version);
+			}
 		} else {
 			index += 17;
 			while (*(memVerList + index) != 13)
@@ -48,6 +57,9 @@ Entry *handleVerList(Entry *currExtEntry, long fileSize, char *memVerList) {
 			printf("Parsed entries: %d", parsedExtEntries);
 			consoleUpdate(NULL);
 		}
+	}
+	if (logging) {
+		fprintf(logFile, "[handleVerList] Finished parsing external entries\n");
 	}
 
 	consoleClear();

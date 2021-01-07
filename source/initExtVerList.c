@@ -1,5 +1,7 @@
 #include "main.h"
 
+extern bool logging;
+extern FILE *logFile;
 extern PadState pad;
 
 Entry* initExtVerList() {
