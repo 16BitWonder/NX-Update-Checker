@@ -195,5 +195,6 @@ Entry* initLocalVerList() {
 		fprintf(logFile, "[initLocalVerList] Freed metaStatusList\n");
 		fflush(logFile);
 	}
+	consoleClear();
 	return localVerList;
 }

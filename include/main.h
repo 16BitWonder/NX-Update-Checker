@@ -20,12 +20,12 @@ typedef struct Entry {
 	struct Entry *prev;
 }Entry;
 
+bool downloadWebVerList(void);
 bool initLogging(void);
 void initLists(NsApplicationRecord**, int*, NsApplicationContentMetaStatus***, int**);
 void updateMeta(char**, char**, u64);
 Entry* initLocalVerList(void);
 Entry* initExtVerList(void);
-Entry* initWebVerList(void);
 Entry* handleVerList(Entry*, long, char*);
 void checkForUpdates(FILE*, Entry*, Entry*);
 void freeList(Entry*);

@@ -34,43 +34,31 @@ int main(int argc, char **argv) {
 	}
 	
 	if (logging) {
-		fprintf(logFile, "[main] Begin initWebVerList\n");
+		fprintf(logFile, "[main] Begin downloadWebVerList\n");
 		fflush(logFile);
 	}
-	socketInitializeDefault();
-	Entry *extVerList;
-	extVerList = initWebVerList();
-	socketExit();
+	bool downloadedVerList = downloadWebVerList();
+	if (logging) {
+		if(downloadedVerList) {
+			fprintf(logFile, "[main] versions.txt successfully downloaded\n");
+			fflush(logFile);
+		} else {
+			fprintf(logFile, "[main] Failed to download versions.txt\n");
+			fflush(logFile);
+		}
+	}
+	
+	if (logging) {
+		fprintf(logFile, "[main] Begin initExtVerList\n");
+		fflush(logFile);
+	}
+	Entry *extVerList = initExtVerList();
 	if (logging && (extVerList == NULL)) {
-		fprintf(logFile, "[main] initWebVerList completed, did not retrieve versions.txt\n");
+		fprintf(logFile, "[main] initExtVerList completed, did not find versions.txt\n");
 		fflush(logFile);
 	} else if (logging) {
-		fprintf(logFile, "[main] initWebVerList completed, retrieved versions.txt\n");
+		fprintf(logFile, "[main] initExtVerList completed, found versions.txt\n");
 		fflush(logFile);
-	}
-
-	if (extVerList == NULL) {
-		printf("\nPress (+) to continue.\n");
-		consoleUpdate(NULL);
-		while (1) {
-			padUpdate(&pad);
-			u64 kDown = padGetButtonsDown(&pad);
-			if (kDown & HidNpadButton_Plus)
-				break;
-		}
-		consoleClear();
-		if (logging) {
-			fprintf(logFile, "[main] Begin initExtVerList\n");
-			fflush(logFile);
-		}
-		extVerList = initExtVerList();
-		if (logging && (extVerList == NULL)) {
-			fprintf(logFile, "[main] initExtVerList completed, did not find versions.txt\n");
-			fflush(logFile);
-		} else if (logging) {
-			fprintf(logFile, "[main] initExtVerList completed, found versions.txt\n");
-			fflush(logFile);
-		}
 	}
 	
 	if (extVerList == NULL) {
