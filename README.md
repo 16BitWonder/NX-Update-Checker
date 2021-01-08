@@ -19,5 +19,7 @@ As of writing (2020/07/14) binaries are built using switch-curl 7.69.1-1, as bui
 
 ## Kudos
 [blawar](https://github.com/blawar) - titledb
+
 [simontime](https://github.com/simontime) - VersionListBot
+
 [aedalzotto](https://github.com/aedalzotto) - Initial downloading code
