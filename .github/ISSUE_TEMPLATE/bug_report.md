@@ -16,6 +16,10 @@ Atmosphere Version:
 
 Additional sysmodules being loaded: 
 
+Blanking Prodinfo/Incognito: (Yes/No)
+
+If Blanking Prodinfo, which application are you using: 
+
 ## Describe the Bug
 Please give a detailed description of the bug that you are encountering.
 
