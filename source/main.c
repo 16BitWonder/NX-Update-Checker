@@ -124,7 +124,7 @@ int main(int argc, char **argv) {
 			}
 			
 			printf("\nResults printed into sdmc:/Available-Updates.txt!\n\n");
-			printf("Press (+) to exit.");
+			printf("Press (+) to exit.\n");
 			
 			if (logging) {
 				printf("\nLogging was enabled");
