@@ -11,11 +11,13 @@ Entry* initExtVerList() {
 	
 	if (logging) {
 		fprintf(logFile, "[initExtVerList] Attempting to open versions.txt\n");
+		fflush(logFile);
 	}
 	verListTxt = fopen("versions.txt", "r");
 	if (verListTxt == NULL) {
 		if (logging) {
 			fprintf(logFile, "[initExtVerList] versions.txt could not be opened\n");
+			fflush(logFile);
 		}
 		printf("\nPlease place a copy of versions.txt in the same directory as this nro.\n");
 		printf("You may find a compatible versions.txt this app was tested with on the\n");
@@ -40,6 +42,7 @@ Entry* initExtVerList() {
 	fread(memVerList, 1, fileSize, verListTxt);
 	if (logging) {
 		fprintf(logFile, "[initExtVerList] Read versions.txt into memory\n");
+		fflush(logFile);
 	}
 	
 	/*Close our input file*/
@@ -55,6 +58,7 @@ Entry* initExtVerList() {
 	}
 	if (logging) {
 		fprintf(logFile, "[initExtVerList] Closed versions.txt\n");
+		fflush(logFile);
 	}
 	
 	return handleVerList(currExtEntry, fileSize, memVerList);

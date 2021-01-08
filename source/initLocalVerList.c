@@ -22,6 +22,7 @@ Entry* initLocalVerList() {
 	initLists(&titleRecords, &recordsLength, &metaStatusList, &metaLength);
 	if (logging) {
 		fprintf(logFile, "[initLocalVerList] Finished initLists\n");
+		fflush(logFile);
 	}
 	
 	/* Meta Status List of Current Title */
@@ -77,6 +78,7 @@ Entry* initLocalVerList() {
 				if (tmpFlipTID[13] == '0') {
 					if (logging) {
 						fprintf(logFile, "[initLocalVerList][%d] Parsed base %s as ", c, tmpFlipTID);
+						fflush(logFile);
 					}
 					strcpy(currEntry->Data.TID, tmpFlipTID);
 					currEntry->Data.TID[13] = '8';
@@ -88,6 +90,7 @@ Entry* initLocalVerList() {
 					strncpy(currEntry->Data.displayVersion, titleDispVersion, 0x0F);
 					if (logging) {
 						fprintf(logFile, "%s\n", currEntry->Data.TID);
+						fflush(logFile);
 					}
 					baseFound = true;
 				}
@@ -103,6 +106,7 @@ Entry* initLocalVerList() {
 						strncpy(currEntry->Data.displayVersion, titleDispVersion, 0x0F);
 						if (logging) {
 							fprintf(logFile, "[initLocalVerList][%d] Parsed update %s\n", c, tmpFlipTID);
+							fflush(logFile);
 						}
 					} else {
 						currEntry = currEntry->prev;
@@ -113,12 +117,14 @@ Entry* initLocalVerList() {
 							if (tmp->Data.TID[13] == '8') {
 								if (logging) {
 									fprintf(logFile, "[initLocalVerList][%d] Updated base [%s][v%d]", c, tmp->Data.TID, tmp->Data.version);
+									fflush(logFile);
 								}
 								/* Update Version in tmp */
 								tmp->Data.version = currMeta[i].version;
 								updatedBase = true;
 								if (logging) {
 									fprintf(logFile, " with update [%s][v%d]\n", tmpFlipTID, tmp->Data.version);
+									fflush(logFile);
 								}
 							}
 							tmp = tmp->prev;
@@ -129,6 +135,7 @@ Entry* initLocalVerList() {
 				} else {
 					if (logging) {
 						fprintf(logFile, "[initLocalVerList][%d] Not parsed, look into this %s\n", c, tmpFlipTID);
+						fflush(logFile);
 					}
 				}
 			}
@@ -143,6 +150,7 @@ Entry* initLocalVerList() {
 				strncpy(currEntry->Data.displayVersion, titleDispVersion, 0x0F);
 				if (logging) {
 					fprintf(logFile, "[initLocalVerList][%d] Parsed DLC %s\n", c, tmpFlipTID);
+					fflush(logFile);
 				}
 			} else {
 				currEntry = currEntry->prev;
@@ -150,6 +158,7 @@ Entry* initLocalVerList() {
 				currEntry->next = NULL;
 				if (logging) {
 					fprintf(logFile, "[initLocalVerList][%d] Ignoring base %s found after update\n", c, tmpFlipTID);
+					fflush(logFile);
 				}
 			}
 
@@ -167,20 +176,24 @@ Entry* initLocalVerList() {
 	}
 	if (logging) {
 		fprintf(logFile, "[initLocalVerList] Finished building local version list\n");
+		fflush(logFile);
 	}
 	
 	consoleClear();
 	free(titleRecords);
 	if (logging) {
 		fprintf(logFile, "[initLocalVerList] Freed titleRecords\n");
+		fflush(logFile);
 	}
 	free(metaLength);
 	if (logging) {
 		fprintf(logFile, "[initLocalVerList] Freed metaLength\n");
+		fflush(logFile);
 	}
 	free(metaStatusList);
 	if (logging) {
 		fprintf(logFile, "[initLocalVerList] Freed metaStatusList\n");
+		fflush(logFile);
 	}
 	return localVerList;
 }

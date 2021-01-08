@@ -9,6 +9,7 @@ Entry *handleVerList(Entry *currExtEntry, long fileSize, char *memVerList) {
 
 	if (logging) {
 		fprintf(logFile, "[handleVerList] Begin populating external entries\n");
+		fflush(logFile);
 	}
 	/* Create our linked list of versionlist Entries */
 	int parsedExtEntries = 0;
@@ -43,6 +44,7 @@ Entry *handleVerList(Entry *currExtEntry, long fileSize, char *memVerList) {
 			parsedExtEntries++;
 			if (logging) {
 				fprintf(logFile, "[handleVerList][%d] Parsed [%s][v%d]\n", parsedExtEntries, currExtEntry->Data.TID, currExtEntry->Data.version);
+				fflush(logFile);
 			}
 		} else {
 			index += 17;
@@ -60,6 +62,7 @@ Entry *handleVerList(Entry *currExtEntry, long fileSize, char *memVerList) {
 	}
 	if (logging) {
 		fprintf(logFile, "[handleVerList] Finished parsing external entries\n");
+		fflush(logFile);
 	}
 
 	consoleClear();
