@@ -238,6 +238,15 @@ void printMissDLC(FILE *out, Entry *localEntries, Entry *extEntries) {
 void initIgnoreList() {
 	// Have an empty entry at head of list
 	ignoreList = calloc(1, sizeof(Entry));
+	
+	if(access("ignore.txt", F_OK ) == -1 ) {
+		if (logging) {
+			fprintf(logFile, "[initIgnoreList] ignore.txt does not exist\n");
+			fflush(logFile);
+		}
+		return;
+	}
+	
 	Entry *tmpIgnore = ignoreList;
 	
 	char *memVerList;
