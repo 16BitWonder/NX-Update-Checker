@@ -1,5 +1,5 @@
 ---
-name: Bug report
+name: Bug Report
 about: Create a report to help us improve
 title: ''
 labels: bug
@@ -30,11 +30,11 @@ Please outline the steps below to reproduce this issue:
 2. ...
 3. ...
 
-## Produced Logs
-For your bug report to be considered you must include produced logs.
+## Produced Logs & Lists
+For your bug report to be considered you must include produced logs, the `versions.txt` used and (if present) `ignore.txt`.
 
 In the same directory as NX-Update-Checker.nro create an empty `log.flag` file and re-run the application.
 
 It running slowly while logging is active is normal, after the crash it will have been produced at the root of your SD as `NXUC.log`
 
-Link the produced log here: 
+Link the produced log and other files below: 
