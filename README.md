@@ -12,13 +12,14 @@ A small console application that checks a Switch's installed contents against a 
 ## Ignore List
 Users can choose to ignore specific game updates and DLC if they choose by creating a file named `ignore.txt` and filling it out with the following structure:
 - For each line a single, whole title ID must be entered for either an update or DLC
+- That title ID may (optionally) be followed by any text/descriptor with or without a space after the title ID
 - ignore.txt must be placed in the same directory as NX-Update-Checker.nro
 
 An example ignore.txt is shown below:
 ```
-0100000000010800
-0100E95004039001
-01006A800016F002
+0100000000010800 Super Mario Odyssey Update
+0100E95004039001 Xenoblade 2 Torna DLC
+01006A800016F002 Super Smash Bros. Joker DLC
 ```
 The above ignore.txt would prevent NX-Update-Checker from showing new Super Mario Odyssey updates, Xenoblade 2 Torna DLC Binary updates and Super Smash Bros. Joker DLC Binary updates.
 

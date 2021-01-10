@@ -301,7 +301,12 @@ void initIgnoreList() {
 		titleID[tidIndex] = *(memVerList+fileIndex);
 		if (tidIndex == 15) {
 			tidIndex = -1;
-			fileIndex += 2;
+			
+			// Navigate to the next entry/EOF
+			while ((fileIndex < fileSize) && (*(memVerList+fileIndex) != '\n')){
+				fileIndex++;
+			}
+			
 			Entry *newIgnore = calloc(1, sizeof(Entry));
 			strcpy(newIgnore->Data.TID, titleID);
 			tmpIgnore->next = newIgnore;
