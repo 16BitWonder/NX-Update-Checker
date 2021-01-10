@@ -111,6 +111,7 @@ Entry* initLocalVerList() {
 					} else {
 						currEntry = currEntry->prev;
 						free(currEntry->next);
+						currEntry->next = NULL;
 						tmp = currEntry;
 						bool updatedBase = false;
 						while (!updatedBase) {

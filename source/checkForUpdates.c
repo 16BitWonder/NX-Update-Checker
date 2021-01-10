@@ -77,7 +77,15 @@ void printNewUpdates(FILE *out, Entry *localEntries, Entry *extEntries) {
 		while (tmpExt != NULL) {
 			if (strcmp(tmpExt->Data.TID, tmpLocal->Data.TID) == 0) {
 				if ((tmpLocal->Data.TID[13] == '8') && (tmpExt->Data.version > tmpLocal->Data.version)) {
+					if (logging) {
+						fprintf(logFile, "[printNewUpdates] Found newer update, checking if it's ignored\n");
+						fflush(logFile);
+					}
 					if (!isIgnored(tmpLocal->Data.TID)) {
+						if (logging) {
+							fprintf(logFile, "[printNewUpdates] Not ignored, printing out\n");
+							fflush(logFile);
+						}
 						fprintf(out, "%s [%s][%s][v%d] -> [v%d]\n", tmpLocal->Data.name, tmpLocal->Data.TID, tmpLocal->Data.displayVersion, tmpLocal->Data.version, tmpExt->Data.version);
 						printf("%s [%s][%s][v%d] -> [v%d]\n", tmpLocal->Data.name, tmpLocal->Data.TID, tmpLocal->Data.displayVersion, tmpLocal->Data.version, tmpExt->Data.version);
 						if (logging) {
@@ -121,7 +129,15 @@ void printNewDLC(FILE *out, Entry *localEntries, Entry *extEntries) {
 		while (tmpExt != NULL) {
 			if (strcmp(tmpExt->Data.TID, tmpLocal->Data.TID) == 0) {
 				if ((tmpLocal->Data.TID[13] != '8') && (tmpExt->Data.version > tmpLocal->Data.version)) {
+					if (logging) {
+						fprintf(logFile, "[printNewDLC] Found newer DLC, checking if it's ignored\n");
+						fflush(logFile);
+					}
 					if (!isIgnored(tmpLocal->Data.TID)) {
+						if (logging) {
+							fprintf(logFile, "[printNewDLC] Not ignored, printing out\n");
+							fflush(logFile);
+						}
 						fprintf(out, "%s [%s][v%d] -> [v%d]\n", tmpLocal->Data.name, tmpLocal->Data.TID, tmpLocal->Data.version, tmpExt->Data.version);
 						printf("%s [%s][v%d] -> [v%d]\n", tmpLocal->Data.name, tmpLocal->Data.TID, tmpLocal->Data.version, tmpExt->Data.version);
 						if (logging) {
