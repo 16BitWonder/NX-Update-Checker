@@ -25,9 +25,7 @@ int main(int argc, char **argv) {
 		fflush(logFile);
 	}
 	
-	Entry *localVerList;
-	localVerList = initLocalVerList();
-	Entry *currLocalEntry = localVerList->next;
+	Entry *localVerList = initLocalVerList();
 	if (logging) {
 		fprintf(logFile, "[main] Local Version List Initialized\n");
 		fflush(logFile);
@@ -100,7 +98,7 @@ int main(int argc, char **argv) {
 	bool finished = false;
     while(appletMainLoop()) {	
 		if (!finished) {
-			checkForUpdates(updFile, currLocalEntry, extVerList);
+			checkForUpdates(updFile, localVerList, extVerList);
 			if (logging) {
 				fprintf(logFile, "[main] Finished checkForUpdates\n");
 				fflush(logFile);
