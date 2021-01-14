@@ -20,6 +20,7 @@ void initLists(NsApplicationRecord **titleRecords, int *recordsLength, NsApplica
 		*(wipMetaStatusList+i) = malloc(sizeof(NsApplicationContentMetaStatus) * *contentMetaCount);
 		nsListApplicationContentMetaStatus(wipRecords[i].application_id, 0, *(wipMetaStatusList+i), *contentMetaCount, wipMetaLength+i);
 	}
+	free(contentMetaCount);
 	nsExit();
 	
 	*metaStatusList = wipMetaStatusList;
