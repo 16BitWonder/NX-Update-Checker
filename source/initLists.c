@@ -13,10 +13,12 @@ void initLists(NsApplicationRecord **titleRecords, int *recordsLength, NsApplica
 	NsApplicationContentMetaStatus **wipMetaStatusList;
 	wipMetaLength = malloc(sizeof(int) * tmpRecordsLength);
 	wipMetaStatusList = malloc(sizeof(NsApplicationContentMetaStatus*) * tmpRecordsLength);
+	s32 *contentMetaCount = malloc(sizeof(s32));
 	for (int i = 0; i < tmpRecordsLength; i++) {
+		nsCountApplicationContentMeta(wipRecords[i].application_id, contentMetaCount);
 		*(wipMetaLength+i) = 0;
-		*(wipMetaStatusList+i) = malloc(sizeof(NsApplicationContentMetaStatus) * 30);
-		nsListApplicationContentMetaStatus(wipRecords[i].application_id, 0, *(wipMetaStatusList+i), 10, wipMetaLength+i);
+		*(wipMetaStatusList+i) = malloc(sizeof(NsApplicationContentMetaStatus) * *contentMetaCount);
+		nsListApplicationContentMetaStatus(wipRecords[i].application_id, 0, *(wipMetaStatusList+i), *contentMetaCount, wipMetaLength+i);
 	}
 	nsExit();
 	
