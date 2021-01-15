@@ -1,7 +1,7 @@
 <p align="center"><img src="https://github.com/16BitWonder/NX-Update-Checker/blob/master/icon.jpg"></p>
 
 # NX-Update-Checker
-A small console application that checks a Switch's installed contents against a provided versionlist for newer updates, and then writes the titles with newer updates and the latest version to sdmc:/Available-Updates.txt.
+A small console application that checks a Switch's installed contents against a provided versionlist for newer/missing updates/DLC, and then writes the titles with newer/missing updates/DLC and the latest version to sdmc:/Available-Updates.txt.
 
 ## Usage
 - In case of no internet connection, grab the latest versions.txt available from the [nx-versions Repository](https://github.com/16BitWonder/nx-versions/blob/master/versions.txt), and save it in the same directory as NX-Update-Checker.nro
