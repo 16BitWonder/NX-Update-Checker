@@ -33,10 +33,9 @@ The logs will be produced at the root of the SD as a file named `NXUC.log`
 ## Additional Information
 This app was specifically re-written to parse the versions.txt posted in the [nx-versions Repository](https://github.com/16BitWonder/nx-versions), if you provide a versions.txt with even a slightly different format it is likely this application will not parse it correctly.
 
-This app's downloading capability was tested with both Atmosphere's prodinfo blanking and 90DNS active.
-Note that there is no standard when it comes to blanking prodinfo and that other applications do so differently.
+This app's downloading capability was tested with Atmosphere's prodinfo blanking, incognito and 90DNS independently.
 
-If you're having issues downloading the latest versions.txt and you have blanked your prodinfo with something other than Atmosphere's exosphere blanking, please switch to it and test again before opening an issue.
+Binary releases are built using switch-curl-7.69.1-1 to avoid connectivity issues with a blanked prodinfo.
 
 ## Kudos
 [blawar](https://github.com/blawar) - titledb

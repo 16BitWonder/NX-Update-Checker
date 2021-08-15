@@ -25,11 +25,24 @@ int main(int argc, char **argv) {
 		fflush(logFile);
 	}
 	
-	Entry *localVerList = initLocalVerList();
+	updateStoredCartVerList();
+	if (logging) {
+		fprintf(logFile, "[main] Updated cart_versions.txt\n");
+		fflush(logFile);
+	}
+	int cartEntryCount = getCartVerListCount();
+	CartEntry **cartVerList = initCartVerList(cartEntryCount);
+	if (logging) {
+		fprintf(logFile, "[main] Cart Version List Initialized\n");
+		fflush(logFile);
+	}
+	
+	Entry *localVerList = initLocalVerList(cartVerList, cartEntryCount);
 	if (logging) {
 		fprintf(logFile, "[main] Local Version List Initialized\n");
 		fflush(logFile);
 	}
+	free(cartVerList);
 	
 	if (logging) {
 		fprintf(logFile, "[main] Begin downloadWebVerList\n");

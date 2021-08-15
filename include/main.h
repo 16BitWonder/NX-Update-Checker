@@ -20,11 +20,19 @@ typedef struct Entry {
 	struct Entry *prev;
 }Entry;
 
+typedef struct CartEntry{
+	u64 patch_id;
+	s32 version;
+} CartEntry;
+
+void updateStoredCartVerList(void);
+int getCartVerListCount(void);
+CartEntry** initCartVerList(int);
 bool downloadWebVerList(void);
 bool initLogging(void);
 void initLists(NsApplicationRecord**, int*, NsApplicationContentMetaStatus***, int**);
 void updateMeta(char**, char**, u64);
-Entry* initLocalVerList(void);
+Entry* initLocalVerList(CartEntry**, int);
 Entry* initExtVerList(void);
 Entry* handleVerList(Entry*, long, char*);
 void checkForUpdates(FILE*, Entry*, Entry*);

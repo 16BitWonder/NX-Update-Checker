@@ -3,7 +3,7 @@
 extern bool logging;
 extern FILE *logFile;
 
-Entry* initLocalVerList() {
+Entry* initLocalVerList(CartEntry** cartVerList, int cartEntryCount) {
 	/* Linked list of Entries to return */
 	Entry *localVerList, *currEntry, *tmp;
 	currEntry = calloc(1, sizeof(Entry));
@@ -197,5 +197,29 @@ Entry* initLocalVerList() {
 		fflush(logFile);
 	}
 	consoleClear();
+	
+	// Parse cartVerList on top of localVerList
+	for (int i = 0; i < cartEntryCount; i++) {
+		
+		currEntry = localVerList;
+		while (currEntry != NULL) {
+			
+			u64 currLocalTID = strtol(currEntry->Data.TID, NULL, 16);
+			if (cartVerList[i]->patch_id == currLocalTID) {
+				// Update the version if a cart had a higher version
+				if (cartVerList[i]->version > currEntry->Data.version) {
+					currEntry->Data.version = cartVerList[i]->version;
+					if (logging) {
+						fprintf(logFile, "[initLocalVerList] Updated %s with cart version: %d\n", currEntry->Data.TID, cartVerList[i]->version);
+						fflush(logFile);
+					}
+				}
+				currEntry = NULL;
+			} 
+			else currEntry = currEntry->next;
+			
+		}
+	}
+	
 	return localVerList;
 }
