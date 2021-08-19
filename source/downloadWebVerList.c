@@ -86,8 +86,8 @@ bool downloadWebVerList() {
  
 	/* init the curl session */ 
 	curl_handle = curl_easy_init();
-	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+	curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYPEER, 0L);
+	curl_easy_setopt(curl_handle, CURLOPT_SSL_VERIFYHOST, 0L);
 	if (logging) {
 		fprintf(logFile, "[downloadWebVerList] curl_easy_init finished\n");
 		fflush(logFile);
