@@ -24,7 +24,7 @@ An example ignore.txt is shown below:
 The above ignore.txt would prevent NX-Update-Checker from showing new Super Mario Odyssey updates, Xenoblade 2 Torna DLC Binary updates and Super Smash Bros. Joker DLC Binary updates.
 
 ## Local Cartridge Version Database
-Should a user have a cartridge inserted, the application will populate any bundled update into a local database `cart_versions.txt` to avoid notifying the user of an update already bundled.
+Should a user have a cartridge inserted, the application will populate any bundled update into a local database `cart_versions.txt` to avoid notifying the user of an update already bundled.  
 E.g. if there is version v65536 on the cartridge, it will be saved. Then if the cartridge is removed the database will be read and not notify the user of updates for that title unless v131072 or higher is available.
 
 
