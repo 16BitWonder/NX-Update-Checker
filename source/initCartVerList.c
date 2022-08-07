@@ -2,7 +2,7 @@
 
 extern bool logging;
 extern FILE *logFile;
-extern PadState pad;
+extern PadState mainPad;
 
 int getGCDBCount(char* index);
 char* readDBFileIntoMem();

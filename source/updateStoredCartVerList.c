@@ -1,6 +1,6 @@
 #include "main.h"
 
-extern PadState pad;
+extern PadState mainPad;
 
 int getGCDBCount(char* index);
 bool gameCardHasBundledUpdate();

@@ -30,7 +30,7 @@
 
 extern bool logging;
 extern FILE *logFile;
-extern PadState pad;
+extern PadState mainPad;
  
 static size_t write_data(void *ptr, size_t size, size_t nmemb, void *stream)
 {
@@ -69,8 +69,8 @@ bool downloadWebVerList() {
 		}
 		
 		while (1) {
-			padUpdate(&pad);
-			u64 kDown = padGetButtonsDown(&pad);
+			padUpdate(&mainPad);
+			u64 kDown = padGetButtonsDown(&mainPad);
 			if (kDown & HidNpadButton_Plus) {
 				curl_global_cleanup();
 				socketExit();
@@ -156,8 +156,8 @@ bool downloadWebVerList() {
 			}
 		
 			while (1) {
-				padUpdate(&pad);
-				u64 kDown = padGetButtonsDown(&pad);
+				padUpdate(&mainPad);
+				u64 kDown = padGetButtonsDown(&mainPad);
 				if (kDown & HidNpadButton_Plus) {
 					remove(pagefilename);
 					curl_easy_cleanup(curl_handle);

@@ -2,7 +2,7 @@
 
 bool logging = false;
 FILE *logFile;
-PadState pad;
+PadState mainPad;
 
 int main(int argc, char **argv) {
 	logging = initLogging();
@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
 	}
 	
 	padConfigureInput(1, HidNpadStyleSet_NpadStandard);
-	padInitializeDefault(&pad);
+	padInitializeDefault(&mainPad);
 	if (logging) {
 		fprintf(logFile, "[main] Pad Initialized\n");
 		fflush(logFile);
@@ -98,8 +98,8 @@ int main(int argc, char **argv) {
 		freeList(localVerList);
 		freeList(extVerList);
 		while (1) {
-			padUpdate(&pad);
-			u64 kDown = padGetButtonsDown(&pad);
+			padUpdate(&mainPad);
+			u64 kDown = padGetButtonsDown(&mainPad);
 			if (kDown & HidNpadButton_Plus) return 0;
 		}
 	}
@@ -122,8 +122,8 @@ int main(int argc, char **argv) {
 				printf("\nPress (+) to exit.");
 				consoleUpdate(NULL);
 				while (1) {
-					padUpdate(&pad);
-					u64 kDown = padGetButtonsDown(&pad);
+					padUpdate(&mainPad);
+					u64 kDown = padGetButtonsDown(&mainPad);
 					if (kDown & HidNpadButton_Plus) {
 						consoleExit(NULL);
 						freeList(localVerList);
@@ -147,8 +147,8 @@ int main(int argc, char **argv) {
 			finished = true;
 		}
 		
-		padUpdate(&pad);
-		u64 kDown = padGetButtonsDown(&pad);
+		padUpdate(&mainPad);
+		u64 kDown = padGetButtonsDown(&mainPad);
 		if (kDown & HidNpadButton_Plus) break;
 		consoleUpdate(NULL);
     }

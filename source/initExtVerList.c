@@ -2,7 +2,7 @@
 
 extern bool logging;
 extern FILE *logFile;
-extern PadState pad;
+extern PadState mainPad;
 
 Entry* initExtVerList() {
 	FILE *verListTxt;
@@ -26,8 +26,8 @@ Entry* initExtVerList() {
 		printf("Press (+) to exit.");
 		consoleUpdate(NULL);
 		while (1) {
-			padUpdate(&pad);
-			u64 kDown = padGetButtonsDown(&pad);
+			padUpdate(&mainPad);
+			u64 kDown = padGetButtonsDown(&mainPad);
 			if (kDown & HidNpadButton_Plus) return NULL;
 		}
 	}
@@ -51,8 +51,8 @@ Entry* initExtVerList() {
 		printf("\nPress (+) to exit.");
 		consoleUpdate(NULL);
 		while (1) {
-			padUpdate(&pad);
-			u64 kDown = padGetButtonsDown(&pad);
+			padUpdate(&mainPad);
+			u64 kDown = padGetButtonsDown(&mainPad);
 			if (kDown & HidNpadButton_Plus) return NULL;
 		}
 	}
