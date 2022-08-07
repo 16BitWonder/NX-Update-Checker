@@ -1,0 +1,4 @@
+[submodule "lib/borealis"]
+	path = lib/borealis
+	url = git@github.com:natinusala/borealis.git
+	branch = legacy
