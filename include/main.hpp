@@ -3,19 +3,13 @@
 #include <mutex>
 
 #define VERSIONS_URL "https://raw.githubusercontent.com/16BitWonder/nx-versions/master/versions.txt"
+#define VERSION 2.0.0
 
-struct MetaData {
-	char TID [17];
-	int version;
+struct Entry {
+	u64 id;
+	u32 version;
 	char displayVersion [0x10];
 	char name [0x200];
-};
-struct Entry {
-	struct MetaData Data;
 	struct Entry *next;
 	struct Entry *prev;
-};
-struct CartEntry{
-	u64 patch_id;
-	s32 version;
 };
