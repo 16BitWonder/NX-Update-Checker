@@ -34,19 +34,3 @@ Users can choose to produce logs while running the application for debugging pur
 Note however, that the application will run much slower while logging all operations it's making.
 
 The logs will be produced at the root of the SD as a file named `NXUC.log`
-
-## Additional Information
-This app was specifically re-written to parse the versions.txt posted in the [nx-versions Repository](https://github.com/16BitWonder/nx-versions), if you provide a versions.txt with even a slightly different format it is likely this application will not parse it correctly.
-
-This app's downloading capability was tested with Atmosphere's prodinfo blanking, incognito and 90DNS independently.
-
-Binary releases are built using switch-curl-7.69.1-1 to avoid connectivity issues with a blanked prodinfo.
-
-## Kudos
-[blawar](https://github.com/blawar) - titledb
-
-[simontime](https://github.com/simontime) - VersionListBot
-
-[aedalzotto](https://github.com/aedalzotto) - Initial downloading code
-
-[bagder](https://github.com/bagder) - Current downloading code
