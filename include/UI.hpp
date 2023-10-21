@@ -1,6 +1,6 @@
 #include "main.hpp"
 
-namespace UI {
+namespace ui {
 	void printHeader();
 	void printMainMenu();
 }

@@ -1,7 +1,7 @@
-#include "UI.hpp"
+#include "ui.hpp"
 #include <cstdio>
 
-namespace UI {
+namespace ui {
 	void printHeader() {
 		printf("============================\n");
 		printf("= NX-Update-Checker v%d.%d.%d =\n", VERSION_MAJOR, VERSION_MINOR, VERSION_BUGFIX);

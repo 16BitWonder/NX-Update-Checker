@@ -1,6 +1,6 @@
 #include "main.hpp"
 #include "common.hpp"
-#include "UI.hpp"
+#include "ui.hpp"
 #include "VersionDB.hpp"
 
 int main(int argc, char **argv) {
@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
 	// Begin appletMainLoop
 	while(appletMainLoop()) {
 		
-		UI::printMainMenu();
+		ui::printMainMenu();
 		
 		padUpdate(&pad);
 		u64 kDown = padGetButtonsDown(&pad);
