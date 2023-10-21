@@ -1,41 +1,26 @@
 #include "main.hpp"
 #include "common.hpp"
+#include "UI.hpp"
 #include "VersionDB.hpp"
-#include <mutex>
-
-PadState pad;
 
 int main(int argc, char **argv) {
 	
 	// Init controller
+	PadState pad;
 	padConfigureInput(1, HidNpadStyleSet_NpadStandard);
 	padInitializeDefault(&pad);
 	consoleInit(NULL);
 	
-	// Update/Build local cartridge version database
-	
-	// Build local version database
-	
-	// Download versions.txt
-	
-	// Build external version database (return if missing)
-	
-	// Open Available-Updates.txt for writing
-	
 	// Begin appletMainLoop
-	std::once_flag onceFlag;
     while(appletMainLoop()) {
 		
-		std::call_once(onceFlag, [](){
-			// Check for updates
-			
-			// Close Available-Updates.txt
-		});
+		UI::printMainMenu();
 		
 		padUpdate(&pad);
 		u64 kDown = padGetButtonsDown(&pad);
 		if (kDown & HidNpadButton_Plus) break;
 		consoleUpdate(NULL);
+		consoleClear();
     }
 
 	// Free what's left before return
