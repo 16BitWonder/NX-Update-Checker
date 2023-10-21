@@ -5,6 +5,10 @@
 
 int main(int argc, char **argv) {
 	
+	enum AppState {
+		mainMenu
+	};
+	
 	// Init controller
 	PadState pad;
 	padConfigureInput(1, HidNpadStyleSet_NpadStandard);
@@ -14,7 +18,7 @@ int main(int argc, char **argv) {
 	// Begin appletMainLoop
 	while(appletMainLoop()) {
 		
-		ui::printMainMenu();
+		ui::updateUI();
 		
 		padUpdate(&pad);
 		u64 kDown = padGetButtonsDown(&pad);
