@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
 	consoleInit(NULL);
 	
 	// Begin appletMainLoop
-    while(appletMainLoop()) {
+	while(appletMainLoop()) {
 		
 		UI::printMainMenu();
 		
@@ -21,9 +21,9 @@ int main(int argc, char **argv) {
 		if (kDown & HidNpadButton_Plus) break;
 		consoleUpdate(NULL);
 		consoleClear();
-    }
+	}
 
 	// Free what's left before return
 	consoleExit(NULL);
-    return 0;
+	return 0;
 }
