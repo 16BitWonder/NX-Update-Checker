@@ -5,7 +5,7 @@ enum UISelection {
 	printAvailableUpdates,
 	printLocalVersions,
 	updateExternalVersions,
-	manageCartridgeDatabase
+	manageCartridgeVersions
 };
 
 namespace ui {
