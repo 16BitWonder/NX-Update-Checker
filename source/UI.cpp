@@ -16,7 +16,7 @@ namespace ui {
 		printf("   Print Available Updates\n");
 		printf("   Print Local Version List\n");
 		printf("   Update External Version List\n");
-		printf("   Manage CartridgeDB\n");
+		printf("   Manage Cartridge Version List\n");
 		return;
 	}
 	
