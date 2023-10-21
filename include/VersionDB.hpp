@@ -1,4 +1,4 @@
-#include <switch.h>
+#include "common.hpp"
 
 struct Entry {
 	u64 id;

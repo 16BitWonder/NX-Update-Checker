@@ -1,4 +1,7 @@
 #include "main.hpp"
+#include "common.hpp"
+#include "VersionDB.hpp"
+#include <mutex>
 
 PadState pad;
 
