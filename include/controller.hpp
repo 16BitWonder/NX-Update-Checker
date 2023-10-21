@@ -1,5 +1,11 @@
 #include "common.hpp"
 
-namespace controller {
-	u64 getPadDown(PadState);
+class Controller {
+	private:
+	PadState pad;
+	u64 kHeld = 0;
+	
+	public:
+	void Init();
+	u64 getNewPressed();
 };

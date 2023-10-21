@@ -1,5 +1,4 @@
 #include "ui.hpp"
-#include "common.hpp"
 #include <cstdio>
 
 namespace ui {
@@ -14,25 +13,30 @@ namespace ui {
 	
 	void printMainMenu() {
 		printHeader();
-		printf("   Print Available-Updates\n");
+		printf("   Print Available Updates\n");
 		printf("   Print Local Version List\n");
 		printf("   Update External Version List\n");
 		printf("   Manage CartridgeDB\n");
 		return;
 	}
 	
-	void updateCursor() {
-		// TODO - Need hid implemented
-		// update cursor value based on controller returned value
+	void updateCursor(u64 kPressed) {
+		// Update cursor
+		if ((kPressed & HidNpadButton_Up) && (cursor > 0)) {
+			cursor--;
+		}
+		if ((kPressed & HidNpadButton_Down) && (cursor < 3)) {
+			cursor++;
+		}
 		return;
 	}
 	
-	void updateUI() {
+	void updateUI(u64 kPressed) {
 		// Print MainMenu
 		printMainMenu();
 		
 		// Update cursor
-		updateCursor();
+		updateCursor(kPressed);
 		
 		// Print cursor
 		printf("\x1b[%d;2H>", 5+cursor);

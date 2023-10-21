@@ -1,4 +1,5 @@
 #include "main.hpp"
+#include "common.hpp"
 
 enum UISelection {
 	printAvailableUpdates,
@@ -8,5 +9,5 @@ enum UISelection {
 };
 
 namespace ui {
-	void updateUI();
+	void updateUI(u64);
 }

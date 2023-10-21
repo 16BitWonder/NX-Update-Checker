@@ -1,6 +1,6 @@
 #include "main.hpp"
 #include "common.hpp"
-#include "controller.hpp"
+#include "Controller.hpp"
 #include "ui.hpp"
 #include "VersionDB.hpp"
 
@@ -13,22 +13,21 @@ int main(int argc, char **argv) {
 	// Init console
 	consoleInit(NULL);
 	
-	// Init controller
-	PadState pad;
-	padConfigureInput(1, HidNpadStyleSet_NpadStandard);
-	padInitializeDefault(&pad);
+	// Init Controller
+	Controller controller;
+	controller.Init();
 	
 	// Begin appletMainLoop
 	while(appletMainLoop()) {
 		
-		// Update UI
-		ui::updateUI();
-		
 		// Update input
-		u64 kDown = controller::getPadDown(pad);
+		u64 kPressed = controller.getNewPressed();
+		
+		// Update UI
+		ui::updateUI(kPressed);
 		
 		// Check for exit
-		if (kDown & HidNpadButton_Plus) break;
+		if (kPressed & HidNpadButton_Plus) break;
 		consoleUpdate(NULL);
 		consoleClear();
 	}
