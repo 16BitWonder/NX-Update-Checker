@@ -22,10 +22,10 @@ namespace ui {
 	
 	void updateCursor(u64 kPressed) {
 		// Update cursor
-		if ((kPressed & HidNpadButton_Up) && (cursor > 0)) {
+		if ((kPressed & HidNpadButton_Up) && (cursor > printAvailableUpdates)) {
 			cursor--;
 		}
-		if ((kPressed & HidNpadButton_Down) && (cursor < 3)) {
+		if ((kPressed & HidNpadButton_Down) && (cursor < manageCartridgeVersions)) {
 			cursor++;
 		}
 		return;
@@ -40,5 +40,9 @@ namespace ui {
 		
 		// Print cursor
 		printf("\x1b[%d;2H>", 5+cursor);
+	}
+	
+	u8 getSelection() {
+		return cursor;
 	}
 }

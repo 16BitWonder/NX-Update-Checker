@@ -6,10 +6,6 @@
 
 int main(int argc, char **argv) {
 	
-	enum AppState {
-		mainMenu
-	};
-	
 	// Init console
 	consoleInit(NULL);
 	
@@ -22,6 +18,26 @@ int main(int argc, char **argv) {
 		
 		// Update input
 		u64 kPressed = controller.getNewPressed();
+		
+		// Execute selection
+		if (kPressed & HidNpadButton_A) {
+			switch (ui::getSelection()) {
+				case printAvailableUpdates:
+					// TODO
+					break;
+				case printLocalVersions:
+					// TODO
+					break;
+				case updateExternalVersions:
+					// TODO
+					break;
+				case manageCartridgeVersions:
+					// TODO
+					break;
+				default:
+					break;
+			}
+		}
 		
 		// Update UI
 		ui::updateUI(kPressed);

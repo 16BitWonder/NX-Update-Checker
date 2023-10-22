@@ -9,5 +9,7 @@ enum UISelection {
 };
 
 namespace ui {
+	void printHeader();
 	void updateUI(u64);
+	u8 getSelection();
 }
