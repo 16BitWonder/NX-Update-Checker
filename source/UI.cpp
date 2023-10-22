@@ -2,6 +2,25 @@
 #include <cstdio>
 
 namespace ui {
+	
+	// Updates this LoadingBar
+	void LoadingBar::updateLoadingBar(int processedEntries) {
+		int stepInterval = total / STEPS;
+		int stepsToPrint = processedEntries / stepInterval;
+		
+		// Print loading bar
+		printf("[");
+		// Print filled steps
+		for (int i = 0; i < stepsToPrint; i++) {
+			printf("\x1b[H\e[47m ");
+		}
+		// Print empty steps
+		for (int i = 0; i < (STEPS - stepsToPrint); i++) {
+			printf("\x1b[H\e[40m ");
+		}
+		printf("\x1b[H\e[40m] %d%%", (processedEntries * 100) / total);
+	};
+	
 	u8 cursor = printAvailableUpdates;
 	
 	void printHeader() {

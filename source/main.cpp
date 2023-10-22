@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
 	bool runOnStartup = true;
 	while(appletMainLoop()) {
 		
-		// Init Local Version List
+		// Init Local and External Version Lists
 		if (runOnStartup) {
 			// TODO
 			// Update cartridge version List file with inserted cartridge
@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
 			// Declare/Init cartVersions
 			// Update localVersions with cartVersions
 			// Init externalVersions (should account for missing versions.txt)
+			runOnStartup = false;
 		}
 		
 		// Update input
