@@ -1,8 +1,15 @@
 #include "ns.hpp"
+#include <fstream>
 
 namespace ns {
-	VersionDB initExternalVersions() { // TODO - should account for missing versions.txt
+	VersionDB initExternalVersions() {
 		VersionDB extVersions;
+		
+		// Find versions.txt
+		std::ifstream extFile("versions.txt");
+		if (!extFile.good()) {
+			// File not found or inaccessible, prompt them to update external list
+		}
 		
 		return extVersions;
 	}
