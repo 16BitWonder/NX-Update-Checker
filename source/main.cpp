@@ -1,6 +1,7 @@
 #include "main.hpp"
 #include "common.hpp"
 #include "Controller.hpp"
+#include "ns.hpp"
 #include "ui.hpp"
 #include "VersionDB.hpp"
 
@@ -26,7 +27,7 @@ int main(int argc, char **argv) {
 			// Init localVersions
 			// Declare/Init cartVersions
 			// Update localVersions with cartVersions
-			// Init externalVersions (should account for missing versions.txt)
+			externalVersions = ns::initExternalVersions();
 			runOnStartup = false;
 		}
 		

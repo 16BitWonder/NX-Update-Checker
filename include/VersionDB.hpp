@@ -1,3 +1,5 @@
+#ifndef VERSIONDB_HPP
+#define VERSIONDB_HPP
 #include "common.hpp"
 
 struct Entry {
@@ -21,3 +23,4 @@ class VersionDB {
 	void addTitle(u64, u32, char [0x200], char [0x10]);
 	bool updateTitleVersion(u64, u32);
 };
+#endif
