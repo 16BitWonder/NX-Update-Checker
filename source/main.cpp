@@ -4,6 +4,7 @@
 #include "ns.hpp"
 #include "ui.hpp"
 #include "VersionDB.hpp"
+#include <string>
 
 int main(int argc, char **argv) {
 	
@@ -25,9 +26,10 @@ int main(int argc, char **argv) {
 			// TODO
 			// Update cartridge version List file with inserted cartridge
 			// Init localVersions
-			// Declare/Init cartVersions
+			VersionDB cartVersions = ns::initExternalVersions("cart_versions.txt");
+			// Update cartVersions with current cart info if necessary
 			// Update localVersions with cartVersions
-			externalVersions = ns::initExternalVersions();
+			externalVersions = ns::initExternalVersions("versions.txt");
 			runOnStartup = false;
 		}
 		
