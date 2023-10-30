@@ -24,7 +24,7 @@ bool VersionDB::navigateToApplicationID(u64 application_id) {
 // Public Functions
 
 // Takes provided title info, creates an Entry and appends it to this VersionDB at the tail - name and displayVersion are optional
-void VersionDB::addTitle(u64 application_id, u32 version, char name[0x200] = NULL, char displayVersion[0x10] = NULL) {
+void VersionDB::addTitle(u64 application_id, u32 version, char name[0x200], char displayVersion[0x10]) {
 	
 	//Allocate new Entry
 	traverse = (Entry*)malloc(sizeof(Entry));
@@ -51,6 +51,27 @@ void VersionDB::addTitle(u64 application_id, u32 version, char name[0x200] = NUL
 	}
 	
 	size++;
+	return;
+}
+
+// Overload of addTitle allowing std::string to be passed instead of char arrays
+void VersionDB::addTitleStrings(u64 application_id, u32 version, std::string name, std::string displayVersion) {
+	
+	// Convert std::string args to char[...]
+	char* convertedName = NULL;
+	char* convertedDisplayVersion = NULL;
+	if (!name.empty()) {
+		convertedName = (char*)malloc(0x200 * sizeof(char));
+		std::strcpy(convertedName, name.c_str());
+	}
+	if (!displayVersion.empty()) {
+		convertedDisplayVersion = (char*)malloc(0x10 * sizeof(char));
+		std::strcpy(convertedDisplayVersion, displayVersion.c_str());
+	}
+	
+	// Call into normal addTitle
+	addTitle(application_id, version, convertedName, convertedDisplayVersion);	
+	
 	return;
 }
 

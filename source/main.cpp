@@ -18,6 +18,7 @@ int main(int argc, char **argv) {
 	// Begin appletMainLoop
 	VersionDB localVersions;
 	VersionDB externalVersions;
+	VersionDB cartVersions;
 	bool runOnStartup = true;
 	while(appletMainLoop()) {
 		
@@ -26,7 +27,7 @@ int main(int argc, char **argv) {
 			// TODO
 			// Update cartridge version List file with inserted cartridge
 			// Init localVersions
-			VersionDB cartVersions = ns::initExternalVersions("cart_versions.txt");
+			cartVersions = ns::initExternalVersions("cart_versions.txt");
 			// Update cartVersions with current cart info if necessary
 			// Update localVersions with cartVersions
 			externalVersions = ns::initExternalVersions("versions.txt");

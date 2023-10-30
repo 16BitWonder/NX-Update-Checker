@@ -56,10 +56,33 @@ namespace ns {
 	VersionDB initExternalVersions(std::string filepath) {
 		VersionDB extVersions;
 		
-		// Find versions.txt
+		// Find input file
 		std::ifstream extFile(filepath);
 		if (!extFile.good()) {
-			// File not found or inaccessible, prompt them to update external list
+			// TODO
+			// File not found or inaccessible
+		}
+		
+		// Determine if it was a version list with titles
+		bool hasTitles = filepath != "versions.txt";
+		
+		// TODO - Should add a loading bar here
+		
+		// Read through file until EOF
+		std::string currLine = "";
+		while (!extFile.eof()) {
+			
+			// Get next line from file
+			getline(extFile, currLine);
+			
+			// Parse info from this line
+			std::string title = "";
+			u64 application_id = 0;
+			u32 version = 0;
+			parseApplicationIDAndVersion(currLine, &title, &application_id, &version, hasTitles);
+			
+			// Add parsed info to extVersions
+			extVersions.addTitleStrings(application_id, version, title);
 		}
 		
 		return extVersions;
