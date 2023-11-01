@@ -1,10 +1,11 @@
 #include "main.hpp"
 #include "common.hpp"
-#include "Controller.hpp"
 #include "ns.hpp"
 #include "ui.hpp"
 #include "VersionDB.hpp"
 #include <string>
+
+Controller controller;
 
 int main(int argc, char **argv) {
 	
@@ -12,7 +13,6 @@ int main(int argc, char **argv) {
 	consoleInit(NULL);
 	
 	// Init Controller
-	Controller controller;
 	controller.Init();
 	
 	// Begin appletMainLoop
@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
 			cartVersions = ns::initExternalVersions("cart_versions.txt");
 			// Update cartVersions with current cart info if necessary
 			// Update localVersions with cartVersions
-			externalVersions = ns::initExternalVersions("versions.txt");
+			//externalVersions = ns::initExternalVersions("versions.txt");
 			runOnStartup = false;
 		}
 		

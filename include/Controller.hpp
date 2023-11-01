@@ -1,3 +1,5 @@
+#ifndef CONTROLLER_HPP
+#define CONTROLLER_HPP
 #include "common.hpp"
 
 class Controller {
@@ -9,3 +11,4 @@ class Controller {
 	void Init();
 	u64 getNewPressed();
 };
+#endif

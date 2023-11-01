@@ -2,6 +2,8 @@
 #include <fstream>
 #include <cmath>
 
+extern Controller controller;
+
 namespace ns {
 	
 	// Takes a hex-char and index and returns it as a decimal number
@@ -57,10 +59,15 @@ namespace ns {
 		VersionDB extVersions;
 		
 		// Find input file
-		std::ifstream extFile(filepath);
+		std::ifstream extFile(filepath, std::ifstream::in);
 		if (!extFile.good()) {
-			// TODO
-			// File not found or inaccessible
+			// Not found or not opened
+			printf("%s could not be opened\n", filepath.c_str());
+			printf("Press B to return\n");
+			consoleUpdate(NULL);
+			while (true) {
+				if (controller.getNewPressed() & HidNpadButton_B) return extVersions;
+			}
 		}
 		
 		// Determine if it was a version list with titles
@@ -68,21 +75,25 @@ namespace ns {
 		
 		// TODO - Should add a loading bar here
 		
-		// Read through file until EOF
+		// Read through file until EOF, read/toss the header line before loop
 		std::string currLine = "";
+		getline(extFile, currLine);
 		while (!extFile.eof()) {
 			
 			// Get next line from file
 			getline(extFile, currLine);
 			
-			// Parse info from this line
-			std::string title = "";
-			u64 application_id = 0;
-			u32 version = 0;
-			parseApplicationIDAndVersion(currLine, &title, &application_id, &version, hasTitles);
-			
-			// Add parsed info to extVersions
-			extVersions.addTitleStrings(application_id, version, title);
+			// Don't execute the rest of the loop if we've reached EOF
+			if (!extFile.eof()) {
+				// Parse info from this line
+				std::string title = "";
+				u64 application_id = 0;
+				u32 version = 0;
+				parseApplicationIDAndVersion(currLine, &title, &application_id, &version, hasTitles);
+				
+				// Add parsed info to extVersions
+				extVersions.addTitleStrings(application_id, version, title);
+			}
 		}
 		
 		return extVersions;
